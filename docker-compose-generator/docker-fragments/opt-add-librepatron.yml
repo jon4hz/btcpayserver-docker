@@ -4,8 +4,8 @@ services:
         container_name: librepatron
         restart: unless-stopped
         image: jvandrew/librepatron:0.7.39
-        expose:
-            - "8006"
+        networks:
+            default:
         volumes:
             - data-volume:/var/lib/db
             - config-volume:/var/lib/config
@@ -24,8 +24,8 @@ services:
         container_name: isso
         restart: unless-stopped
         image: jvandrew/isso:atron.22
-        expose:
-            - "8080"
+        networks:
+            default:
         volumes:
             - data-volume:/var/lib/db
             - config-volume:/var/lib/config

@@ -9,8 +9,8 @@ services:
       - "./torrc-relay.tmpl:/etc/docker-gen/templates/torrc.tmpl:ro"
       - "tor_relay_torrcdir:/usr/local/etc/tor"
     entrypoint: /usr/local/bin/docker-gen -notify-sighup tor-relay -watch -wait 5s:30s /etc/docker-gen/templates/torrc.tmpl /usr/local/etc/tor/torrc-2
-    links:
-      - tor-relay
+    networks:
+      default:
     environment:
       TOR_RELAY_NICKNAME: ${TOR_RELAY_NICKNAME}
       TOR_RELAY_EMAIL: ${TOR_RELAY_EMAIL}
@@ -28,6 +28,8 @@ services:
     ports:
       - "9001:9001"
       - "9030:9030"
+    networks:
+      default:
 volumes:
   tor_relay_datadir:
   tor_relay_torrcdir:

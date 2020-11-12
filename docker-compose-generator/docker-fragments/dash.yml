@@ -11,11 +11,10 @@ services:
         port=9999
         rpcport=9998
         whitelist=0.0.0.0/0
-    expose:
-      - "9998"
-      - "9999"
     volumes:
       - "dash_datadir:/data"
+    networks:
+      default:
   nbxplorer:
     environment:
       NBXPLORER_CHAINS: "dash"

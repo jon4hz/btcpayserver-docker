@@ -20,31 +20,22 @@ services:
         noencryptwallet=1
     ports:
       - "9735:9735"
-    expose:
-      - "8080"
-      - "9735"
     volumes:
       - "lnd_bitcoingold_datadir:/data"
       - "bgold_datadir:/deps/.bitcoingold"
-    links:
-      - bgoldd
+    networks:
+      default:
 
   btcpayserver:
     environment:
       BTCPAY_BTGLIGHTNING: "type=lnd-rest;server=http://lnd_bitcoingold:8080/;macaroonfilepath=/etc/lnd_bitcoingold/admin.macaroon;allowinsecure=true"
     volumes:
       - "lnd_bitcoingold_datadir:/etc/lnd_bitcoingold"
-    links:
-      - lnd_bitcoingold
 
   nginx:
-    links:
-      - "lnd_bitcoingold"
     volumes:
       - "lnd_bitcoingold_datadir:/lnd"
   nginx-gen:
-    links:
-      - "lnd_bitcoingold"
     volumes:
       - "lnd_bitcoingold_datadir:/lnd"
 

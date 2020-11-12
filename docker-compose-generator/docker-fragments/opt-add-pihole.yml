@@ -8,11 +8,8 @@ services:
             ServerIP: "${PIHOLE_SERVERIP:-127.0.0.1}"
             VIRTUAL_HOST: pi.hole
             VIRTUAL_HOST_NAME: "pihole"
-        expose:
-            - "53"
-            - "67"
-            - "80"
-            - "443"
+        networks:
+            default:
         ports:
             - "53:53/udp"
         volumes:

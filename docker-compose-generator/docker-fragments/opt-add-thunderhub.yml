@@ -21,11 +21,9 @@ services:
         volumes:
             - "lnd_bitcoin_datadir:/etc/lnd"
             - "lnd_bitcoin_thub_datadir:/data"
-        expose:
-            - "3000"
+        networks:
+            default:
         command: ["npm", "run", "start:cookie", "--", "/data/.cookie"]
-        links:
-            - lnd_bitcoin
 volumes:
     lnd_bitcoin_thub_datadir:
 required:

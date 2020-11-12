@@ -12,10 +12,8 @@ services:
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL:-<no value>}
       VIRTUAL_HOST: ${WOOCOMMERCE_HOST}
       VIRTUAL_HOST_NAME: "woocommerce"
-    expose:
-      - "80"
-    links:
-      - mariadb
+    networks:
+      default:
     volumes:
       - "woocommerce_html:/var/www/html"
 
@@ -26,8 +24,8 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
-    expose:
-      - "3306"
+    networks:
+      default:
     volumes:
       - "mariadb_datadir:/var/lib/mysql"
 

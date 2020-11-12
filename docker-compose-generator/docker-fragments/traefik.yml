@@ -15,8 +15,8 @@ services:
       - "./servers.toml:/servers.toml"
       - "./traefik_logs:/traefik_logs"
 
-    links:
-      - btcpayserver
+    networks:
+      default:
 
 volumes:
   traefik_logs:

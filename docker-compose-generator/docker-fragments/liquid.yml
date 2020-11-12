@@ -18,9 +18,8 @@ services:
         validatepegin=0
         prune=5000
         fallbackfee=0.000001
-    expose:
-      - "43782"
-      - "39388"
+    networks:
+      default:
     volumes:
       - "elements_datadir:/data"
       - "elements_wallet_datadir:/walletdata"

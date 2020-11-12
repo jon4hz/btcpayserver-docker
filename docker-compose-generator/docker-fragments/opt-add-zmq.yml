@@ -7,18 +7,11 @@ services:
         zmqpubrawblock=tcp://0.0.0.0:28332
         zmqpubrawtx=tcp://0.0.0.0:28333
         zmqpubhashblock=tcp://0.0.0.0:28334
-    expose:
-      - "28332"
-      - "28333"
-      - "28334"
   litecoind:
     environment:
       BITCOIN_EXTRA_ARGS: |
         zmqpubrawblock=tcp://0.0.0.0:28332
         zmqpubrawtx=tcp://0.0.0.0:28333
-    expose:
-      - "28332"
-      - "28333"
   groestlcoind:
     environment:
       BITCOIN_EXTRA_ARGS: |
@@ -26,8 +19,6 @@ services:
         zmqpubrawblock=tcp://0.0.0.0:21441
         zmqpubrawtxlock=tcp://0.0.0.0:21441
         zmqpubhashblock=tcp://0.0.0.0:21441
-    expose:
-      - "21441"
   bgoldd:
     environment:
       BITCOIN_EXTRA_ARGS: |
@@ -35,5 +26,3 @@ services:
         zmqpubrawblock=tcp://0.0.0.0:28332
         zmqpubrawtxlock=tcp://0.0.0.0:28332
         zmqpubhashblock=tcp://0.0.0.0:28332
-    expose:
-      - "28332"

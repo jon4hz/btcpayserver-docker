@@ -19,11 +19,10 @@ services:
         dbcache=50
     ports:
       - "22555:22555"
-    expose:
-      - "22555"  # RPC
-      - "22556"  # P2P
     volumes:
       - "dogecoin_datadir:/data"
+    networks:
+      default:
   nbxplorer:
     environment:
       NBXPLORER_CHAINS: "doge"

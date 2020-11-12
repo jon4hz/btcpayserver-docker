@@ -25,9 +25,8 @@ services:
       - "nbxplorer_datadir:/root/.nbxplorer"
     ports:
       - "9738:9735"
-    links:
-      - nbxplorer
-      - groestlcoind
+    networks:
+      default:
   clightning_groestlcoin_charge:
     image: groestlcoin/groestlcoin-lightning-charge:version-0.4.22
     restart: unless-stopped
@@ -38,10 +37,8 @@ services:
     volumes:
       - "clightning_groestlcoin_datadir:/etc/lightning"
       - "clightning_groestlcoin_charge:/data"
-    expose:
-      - "9112"
-    links:
-      - clightning_groestlcoin
+    networks:
+      default:
   btcpayserver:
     environment:
       BTCPAY_GRSLIGHTNING: "type=clightning;server=unix://etc/clightning_groestlcoin/lightning-rpc"
@@ -51,8 +48,6 @@ services:
       - "clightning_groestlcoin_datadir:/etc/clightning_groestlcoin"
       - "clightning_groestlcoin_spark:/etc/clightning_groestlcoin_spark"
       - "clightning_groestlcoin_charge:/etc/clightning_groestlcoin_charge"
-    links:
-      - clightning_groestlcoin
   clightning_groestlcoin_spark:
     image: groestlcoin/groestlcoin-spark:version-0.2.16
     stop_signal: SIGKILL
@@ -63,10 +58,8 @@ services:
     volumes:
       - "clightning_groestlcoin_datadir:/etc/lightning"
       - "clightning_groestlcoin_spark:/data"
-    links:
-      - clightning_groestlcoin
-    expose:
-      - "9739"
+    networks:
+      default:
 volumes:
   clightning_groestlcoin_datadir:
   clightning_groestlcoin_charge:

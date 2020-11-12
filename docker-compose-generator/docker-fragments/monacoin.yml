@@ -11,9 +11,8 @@ services:
         ${NBITCOIN_NETWORK:-regtest}=1
         port=39388
         whitelist=0.0.0.0/0
-    expose:
-      - "43782"
-      - "39388"
+    networks:
+      default:
     volumes:
       - "monacoin_datadir:/data"
   nbxplorer:

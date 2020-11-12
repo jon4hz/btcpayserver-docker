@@ -25,15 +25,12 @@ services:
         notls=1
     ports:
       - "9736:9736"
-    expose:
-      - "8080"
-      - "9736"
     volumes:
       - "lnd_groestlcoin_datadir:/data"
       - "groestlcoin_datadir:/deps/.groestlcoin"
       - "nbxplorer_datadir:/root/.nbxplorer"
-    links:
-      - groestlcoind
+    networks:
+      default:
 
   btcpayserver:
     environment:
@@ -43,17 +40,11 @@ services:
       BTCPAY_GRSEXTERNALLNDSEEDBACKUP: "/etc/lnd_groestlcoin/data/chain/groestlcoin/${NBITCOIN_NETWORK:-regtest}/walletunlock.json"
     volumes:
       - "lnd_groestlcoin_datadir:/etc/lnd_groestlcoin"
-    links:
-      - lnd_groestlcoin
 
   nginx:
-    links:
-      - "lnd_groestlcoin"
     volumes:
       - "lnd_groestlcoin_datadir:/lnd"
   nginx-gen:
-    links:
-      - "lnd_groestlcoin"
     volumes:
       - "lnd_groestlcoin_datadir:/lnd"
 

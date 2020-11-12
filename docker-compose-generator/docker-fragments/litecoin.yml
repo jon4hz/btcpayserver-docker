@@ -11,11 +11,10 @@ services:
         rpcport=43782
         port=39388
         whitelist=0.0.0.0/0
-    expose:
-      - "43782"
-      - "39388"
     volumes:
       - "litecoin_datadir:/data"
+    networks:
+      default:
   nbxplorer:
     environment:
       NBXPLORER_CHAINS: "ltc"

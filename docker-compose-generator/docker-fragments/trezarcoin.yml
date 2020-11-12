@@ -11,9 +11,8 @@ services:
         ${NBITCOIN_NETWORK:-regtest}=1
         port=39388
         whitelist=0.0.0.0/0
-    expose:
-      - "43782"
-      - "39388"
+    networks:
+      default:
     volumes:
       - "trezarcoin_datadir:/data"
   nbxplorer:
@@ -23,8 +22,6 @@ services:
       NBXPLORER_TZCNODEENDPOINT: trezarcoind:39388
       NBXPLORER_TZCRPCUSER: "NBXPLORER_TZCRPCUSER"
       NBXPLORER_TZCRPCPASSWORD: "NBXPLORER_TZCRPCPASS"
-    links:
-      - trezarcoind
     volumes:
       - "trezarcoin_datadir:/root/.trezarcoin"
   btcpayserver:

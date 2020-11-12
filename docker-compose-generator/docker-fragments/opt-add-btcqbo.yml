@@ -9,14 +9,12 @@ services:
       REDIS_URL: "redis://redis:6379/0"
       BTCPAY_HOST: ${BTCPAY_PROTOCOL:-https}://${BTCPAY_HOST}
       CALLBACK_URL: ${BTCPAY_PROTOCOL:-https}://${BTCPAY_HOST}/btcqbo/qbologged
-    expose:
-      - "8001"
-    links:
-      - redis
+    networks:
+      default:
   redis:
     image: redis:5.0.2-alpine
-    expose:
-      - "6379"
+    networks:
+      default:
     volumes:
       - "redis_datadir:/data"
   btcpayserver:

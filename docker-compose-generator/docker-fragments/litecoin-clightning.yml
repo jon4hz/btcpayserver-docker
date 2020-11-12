@@ -21,14 +21,12 @@ services:
       - "nbxplorer_datadir:/root/.nbxplorer"
     ports:
       - "9736:9735"
-    links:
-      - litecoind
+    networks:
+      default:
   btcpayserver:
     environment:
       BTCPAY_LTCLIGHTNING: "type=clightning;server=unix://etc/clightning_litecoin/lightning-rpc"
     volumes:
       - "clightning_litecoin_datadir:/etc/clightning_litecoin"
-    links:
-      - clightning_litecoin
 volumes:
   clightning_litecoin_datadir:

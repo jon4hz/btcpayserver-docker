@@ -30,15 +30,12 @@ services:
         protocol.wumbo-channels=1
     ports:
       - "9735:9735"
-    expose:
-      - "8080"
-      - "9735"
     volumes:
       - "lnd_bitcoin_datadir:/data"
       - "bitcoin_datadir:/deps/.bitcoin"
       - "nbxplorer_datadir:/root/.nbxplorer"
-    links:
-      - bitcoind
+    networks:
+      default:
 
   bitcoin_rtl:
     image: shahanafarooqui/rtl:0.9.2
@@ -56,10 +53,8 @@ services:
       - "bitcoin_datadir:/etc/bitcoin"
       - "lnd_bitcoin_datadir:/etc/lnd"
       - "lnd_bitcoin_rtl_datadir:/data"
-    expose:
-      - "3000"
-    links:
-      - lnd_bitcoin
+    networks:
+      default:
 
   btcpayserver:
     environment:
@@ -71,8 +66,6 @@ services:
     volumes:
       - "lnd_bitcoin_datadir:/etc/lnd_bitcoin"
       - "lnd_bitcoin_rtl_datadir:/etc/lnd_bitcoin_rtl"
-    links:
-      - lnd_bitcoin
 
   bitcoind:
     environment:
@@ -84,13 +77,9 @@ services:
         rpcauth=lnd:d031f7567c5b02ba95524170e51c77f4$$827ce5412f653d6613c2f480e521eb437c866b999bdeb2ee4f9c41d3b00dff1c
 
   nginx:
-    links:
-      - "lnd_bitcoin"
     volumes:
       - "lnd_bitcoin_datadir:/lnd"
   nginx-gen:
-    links:
-      - "lnd_bitcoin"
     volumes:
       - "lnd_bitcoin_datadir:/lnd"
 

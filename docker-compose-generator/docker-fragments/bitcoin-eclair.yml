@@ -31,14 +31,12 @@ services:
         -Declair.bitcoind.rpcpassword=sFLjcg99Puh4k3CAZCQkLvC-fcoFUFRyKwKcXQKa7dw=
         -Declair.bitcoind.zmqblock=tcp://bitcoind:28332
         -Declair.bitcoind.zmqtx=tcp://bitcoind:28333
-    expose:
-      - "9735"  # server port
-      - "8080"  # api port
     volumes:
       - "bitcoin_datadir:/etc/bitcoin"
       - "eclair_bitcoin_datadir:/data"
-    links:
-      - bitcoind
+    networks:
+      default:
+  
 
   bitcoin_rtl:
     image: shahanafarooqui/rtl:0.8.2
@@ -55,10 +53,9 @@ services:
       - "bitcoin_datadir:/etc/bitcoin"
       - "eclair_bitcoin_datadir:/etc/eclair"
       - "eclair_bitcoin_rtl_datadir:/data"
-    expose:
-      - "3000"
-    links:
-      - eclair_bitcoin
+    networks:
+      default:
+    
 
   btcpayserver:
     environment:
@@ -67,8 +64,9 @@ services:
     volumes:
       - "eclair_bitcoin_datadir:/etc/eclair_bitcoin"
       - "eclair_bitcoin_rtl_datadir:/etc/eclair_bitcoin_rtl"
-    links:
-      - eclair_bitcoin
+    networks:
+      default:
+    
 volumes:
   eclair_bitcoin_datadir:
   eclair_bitcoin_rtl_datadir:

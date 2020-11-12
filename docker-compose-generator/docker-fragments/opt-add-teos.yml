@@ -18,6 +18,8 @@ services:
       - "bitcoin_teos_datadir:/root/.teos"
     ports:
       - "9814:9814"
+    networks:
+      default:
   bitcoind:
     environment:
       BITCOIN_EXTRA_ARGS: |

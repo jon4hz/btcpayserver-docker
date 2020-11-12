@@ -11,9 +11,8 @@ services:
         ${NBITCOIN_NETWORK:-regtest}=1
         port=39388
         whitelist=0.0.0.0/0
-    expose:
-      - "43782"
-      - "39388"
+    networks:
+      default:
     volumes:
       - "bitcoinplus_datadir:/data"
   nbxplorer:
@@ -23,8 +22,6 @@ services:
       NBXPLORER_XBCNODEENDPOINT: bitcoinplusd:39388
       NBXPLORER_XBCRPCUSER: "NBXPLORER_XBCRPCUSER"
       NBXPLORER_XBCRPCPASSWORD: "NBXPLORER_XBCRPCPASS"
-    links:
-      - bitcoinplusd
     volumes:
       - "bitcoinplus_datadir:/root/.bitcoinplus"
   btcpayserver:

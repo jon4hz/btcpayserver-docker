@@ -14,8 +14,8 @@ services:
       - "configurator_passworddir:/usr/local/etc/configurator"
       - "$<BTCPAY_HOST_SSHAUTHORIZEDKEYS>?:${BTCPAY_SSHAUTHORIZEDKEYS}"
       - "btcpay_datadir:/datadir"
-    expose:
-      - "80"
+    networks:
+      default:
   btcpayserver:
     environment:
       BTCPAY_EXTERNALCONFIGURATOR: "cookiefilepath=/usr/local/etc/configurator/cookie;server=/configurator"

@@ -16,6 +16,8 @@ services:
     environment:
       - DAEMON_URL=electrumx:1VmSUVGBuLNWvZl0LExRDW0tvl6196-47RfXIzS384g=@bitcoind:43782
       - COIN=BitcoinSegwit
+    networks:
+      default:
 volumes:
   electrumx_datadir:
 incompatible:

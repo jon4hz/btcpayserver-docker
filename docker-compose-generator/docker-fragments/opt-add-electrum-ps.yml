@@ -34,5 +34,7 @@ services:
     volumes:
       - "electrum_ps_datadir:/data"
       - "nbxplorer_datadir:/root/.nbxplorer"
+    networks:
+      default:
 volumes:
   electrum_ps_datadir:
